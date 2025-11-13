@@ -1,0 +1,194 @@
+@import url('theme.css');
+/* ---------------- BASE ---------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+  font-size: 14px;
+}
+
+/* ---------------- CONTAINER ---------------- */
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+/* ---------------- UPLOAD PDF ---------------- */
+.upload-box {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.upload-box h2 {
+  margin-bottom: 1rem;
+}
+
+.drop-area {
+  border: 2px dashed var(--h2-color);
+  padding: 2rem;
+  text-align: center;
+  border-radius: 8px;
+  background: #f9fbfd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.drop-area p {
+  margin-bottom: 0.5rem;
+}
+
+.drop-area button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: var(--primary);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.drop-area button:hover {
+  background: #1d4faf;
+}
+
+#fileName {
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* ---------------- PERSONALIZZAZIONE TESTO ---------------- */
+.text-options {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.text-options h2 {
+  margin-bottom: 1rem;
+}
+
+.text-options label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.text-options select,
+.text-options input {
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+/* ---------------- ESEMPIO E PREVIEW ---------------- */
+.example, .preview {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.example p, .preview p {
+  font-size: 16px;
+}
+
+/* ---------------- PULSANTI ---------------- */
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.actions button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  flex: 1;
+  min-width: 120px;
+}
+
+#confirmBtn {
+  background: var(--primary);
+  color: white;
+}
+
+#confirmBtn:hover {
+  background: #1d4faf;
+}
+
+#resetBtn {
+  background: #e8edf4;
+  color: #333;
+}
+
+#resetBtn:hover {
+  background: #cbd5e1;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+  .drop-area {
+    padding: 1.5rem;
+  }
+
+  .text-options, .example, .preview {
+    padding: 1rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .drop-area p {
+    font-size: 14px;
+  }
+
+  .text-options label,
+  .text-options select,
+  .text-options input {
+    font-size: 14px;
+  }
+
+  .example p, .preview p {
+    font-size: 14px;
+  }
+
+  .drop-area button,
+  .actions button {
+    padding: 0.5rem;
+    font-size: 14px;
+  }
+}

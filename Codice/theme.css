@@ -1,0 +1,45 @@
+/* Central theme for project - colors requested by user */
+:root {
+  --primary: #03A942; /* navbar */
+  --page-bg: #EEEEEE; /* page background */
+  --card-bg: #FFFFFF; /* cards */
+  --h1-color: #005D25;
+  --h2-color: #00B046;
+  --btn-bg: #38E078;
+  --btn-color: #000000;
+  --text-dark: #2c3e50;
+}
+
+/* Global base overrides */
+html, body {
+  background: var(--page-bg);
+  color: var(--text-dark);
+}
+
+/* Navbar */
+.navbar, header, nav {
+  background: var(--primary);
+}
+.navbar a, .nav-links a, .navbar nav a {
+  color: #fff;
+}
+
+/* Cards / containers */
+.card, .container, .profile-card, .profile-edit, .documents, .example, .preview, .map-card, .calendar, .activity-container, .pdf-container, .canvas {
+  background: var(--card-bg);
+  color: var(--text-dark);
+}
+
+/* Headings */
+h1 { color: var(--h1-color); }
+h2 { color: var(--h2-color); }
+
+/* Buttons */
+button, .btn, .save-btn, .download-btn, .view-btn, .add-map, .add-activity-btn, .actions button, .pagination button, .tool-btn, .sidebar-toggle, .btn-save, .btn-share {
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: none;
+}
+
+/* Small hover tweak for buttons */
+button:hover, .btn:hover { filter: brightness(0.95); }

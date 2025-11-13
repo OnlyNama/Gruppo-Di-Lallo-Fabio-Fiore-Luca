@@ -1,0 +1,131 @@
+@import url('theme.css');
+
+/* THEME OVERRIDES - unified color scheme */
+:root{
+  --primary: #03A942;
+  --page-bg: #EEEEEE;
+  --card-bg: #ffffff;
+  --h1-color: #005D25;
+  --h2-color: #00B046;
+  --btn-bg: #38E078;
+  --btn-color: #000000;
+}
+/* global overrides */
+body { background-color: var(--page-bg); }
+.navbar, header, nav { background: var(--primary) !important; }
+.navbar a, .nav-links a, .navbar nav a { color: #fff !important; }
+.card, .container, .profile-card, .profile-edit, .documents, .example, .preview { background: var(--card-bg) !important; color: #2c3e50 !important; }
+h1 { color: var(--h1-color) !important; }
+h2 { color: var(--h2-color) !important; }
+button, .btn, .save-btn, .download-btn, .view-btn, .add-map, .add-activity-btn, .actions button { background: var(--btn-bg) !important; color: var(--btn-color) !important; border: none; }
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background: #f0f2f5;
+  color: #111;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container principale */
+.pdf-container {
+  margin: 120px auto 40px auto;
+  max-width: 900px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Upload box */
+.upload-box {
+  border: 2px dashed #aaa;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  background: #fafafa;
+}
+
+.upload-box p {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #444;
+}
+
+.upload-box button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: var(--primary);
+  color: #fff;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.upload-box button:hover {
+  background: #357ab7;
+}
+
+/* Viewer */
+.viewer {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+canvas {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-width: 100%;
+}
+
+/* Controlli */
+.controls {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.controls button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.controls button:hover {
+  background: #d0d0d0;
+}
+
+/* Text-to-speech */
+.tts-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.tts-controls button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  background: #6aaf6a;
+  color: #fff;
+}
+
+.tts-controls button:hover {
+  background: #558d55;
+}

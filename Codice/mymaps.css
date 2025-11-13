@@ -1,0 +1,132 @@
+@import url('theme.css');
+/* ---------------- RESET BASE ---------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ---------------- CONTENUTO ---------------- */
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+}
+
+/* ---------------- LISTA MAPPE ---------------- */
+.map-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.map-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.map-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* ---------------- PAGINAZIONE ---------------- */
+.pagination {
+  margin-top: 2rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pagination button {
+  margin: 0.25rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  min-width: 40px;
+  transition: background 0.2s;
+}
+
+.pagination button:hover {
+  background: #1d4faf;
+}
+
+/* ---------------- BOTTONE CREA ---------------- */
+.add-map {
+  display: block;
+  margin: 2rem auto;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  background: var(--btn-bg);
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.add-map:hover {
+  background: #218838;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+  .map-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .pagination button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .add-map {
+    width: 80%;
+    padding: 0.6rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-list {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .map-card {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .pagination button {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .add-map {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}

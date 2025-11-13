@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <div id="navbar"></div>
+
+  <!-- Contenitore Login -->
+  <div class="login-container">
+    <div class="login-card">
+      <h1>Accedi</h1>
+      <p class="subtitle">Inserisci le tue credenziali</p>
+      <form id="loginForm">
+        <label for="username">Email o Username</label>
+        <input type="text" id="username" placeholder="Inserisci il tuo username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Inserisci la tua password" required>
+
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+      <p class="signup-link">Non hai un account? <a href="register.html">Registrati</a></p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
+  <script src="script.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

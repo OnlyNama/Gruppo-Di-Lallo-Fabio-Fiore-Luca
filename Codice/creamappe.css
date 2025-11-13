@@ -1,0 +1,568 @@
+@import url('theme.css');
+
+/* THEME OVERRIDES - unified color scheme */
+:root{
+  --primary: #03A942;
+  --page-bg: #EEEEEE;
+  --card-bg: #ffffff;
+  --h1-color: #005D25;
+  --h2-color: #00B046;
+  --btn-bg: #38E078;
+  --btn-color: #000080;
+}
+/* global overrides */
+body { background-color: var(--page-bg); }
+.navbar, header, nav { background: var(--primary) !important; }
+.navbar a, .nav-links a, .navbar nav a { color: #fff !important; }
+.card, .container, .profile-card, .profile-edit, .documents, .example, .preview, .canvas, .canvas-area { background: var(--card-bg) !important; color: #2c3e50 !important; }
+h1 { color: var(--h1-color) !important; }
+h2 { color: var(--h2-color) !important; }
+button, .btn, .save-btn, .download-btn, .view-btn, .add-map, .add-activity-btn, .actions button, .tool-btn, .sidebar-toggle, .btn-save, .btn-share { background: var(--btn-bg) !important; color: var(--btn-color) !important; border: none; }
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background-color: #ffffff;
+  color: #111;
+}
+
+/* Layout principale */
+.editor-container {
+  display: flex;
+  height: calc(100vh - 120px);
+  margin-top: 100px; /* spazio per navbar */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 280px;
+  background: #fdfdfd;
+  padding: 20px;
+  border-right: 2px solid #ccc;
+  /* trasformiamo la sidebar in un pannello fisso a sinistra, a scomparsa */
+  position: fixed;
+  left: 0;
+  /* use a CSS variable set from JS so the sidebar always sits below the navbar */
+  top: var(--navbar-height, 100px);
+  height: calc(100vh - (var(--navbar-height, 100px) + 20px));
+  box-shadow: 2px 0 8px rgba(0,0,0,0.08);
+  transform: translateX(-100%); /* nascosta completamente di default */
+  transition: transform 0.28s ease;
+  z-index: 1000;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.tool-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s ease;
+}
+
+.tool-btn:hover {
+  background: #e0e0e0;
+}
+
+/* stato aperto della sidebar */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* Hide tool buttons until the sidebar is explicitly opened */
+.sidebar .tool-btn {
+  display: none;
+}
+.sidebar.open .tool-btn {
+  display: block;
+}
+
+/* piccolo toggle fisso sul bordo sinistro per aprire/chiudere la sidebar */
+.sidebar-toggle {
+  position: fixed;
+  left: 8px;
+  /* place toggle under the navbar as well */
+  top: calc(var(--navbar-height, 100px) + 20px);
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+/* When the sidebar is opened, move the toggle to sit just outside the panel
+   so it doesn't overlap the content (e.g. the "Strumenti" heading). Uses
+   adjacent sibling selector because the toggle sits right after the aside. */
+.sidebar.open + .sidebar-toggle {
+  left: calc(var(--sidebar-width, 280px) + 12px);
+}
+
+/* Tablet: sidebar is 240px, shift accordingly when open */
+@media (max-width: 992px) {
+  .sidebar.open + .sidebar-toggle { left: calc(240px + 12px); }
+}
+
+/* Mobile: sidebar becomes full-width; keep the toggle near the left edge so
+   it remains accessible and doesn't get pushed off-screen. */
+@media (max-width: 600px) {
+  .sidebar.open + .sidebar-toggle { left: 10px; }
+}
+
+/* quando la sidebar è aperta sposta il contenuto principale per evitare sovrapposizioni */
+.editor-container.shifted {
+  margin-left: 300px; /* lascia spazio per la sidebar aperta */
+  transition: margin-left 0.28s ease;
+}
+
+/* Canvas */
+.canvas-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  position: relative; /* necessario per posizionare l'SVG e gli handle relativamente all'area */
+}
+
+.canvas {
+  width: 90%;
+  height: 600px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+  border: 1px solid #000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Inner wrapper so we can pan the content on small screens without
+   changing node positioning logic (nodes remain absolutely positioned
+   inside the inner wrapper). The transform will be applied to this.
+*/
+.canvas-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 0;
+}
+
+/* Nodi */
+.node {
+  position: absolute;
+  min-width: 120px;
+  min-height: 60px;
+  padding: 10px;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: move;
+}
+
+/* area interna del nodo dove si può digitare: separata dal contenitore per evitare
+   che l'editing cancelli le maniglie o il pulsante delete */
+.node-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6px;
+  outline: none;
+  cursor: text;
+}
+
+.central-node {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  font-weight: bold;
+}
+
+/* Pulsanti */
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-save {
+  background: #dbe8f2;
+}
+
+.btn-share {
+  background: #f2f2f4;
+}
+/* SVG per linee */
+.connections {
+  /* L'SVG è ora dentro #canvas: facciamo in modo che riempia il canvas
+     e stia dietro i nodi (z-index basso). */
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  z-index: 0; /* sotto i nodi */
+}
+
+/* assicurati che le singole linee rispondano ai click sul tratto */
+.svg-line {
+  /* ensure the SVG line element receives pointer events so it can be selected */
+  pointer-events: all;
+}
+
+/* Invisible wider hit line to improve click targets */
+.svg-hitline {
+  pointer-events: all;
+  cursor: pointer;
+}
+
+/* Make the hit-line invisible visually but keep it interactive */
+.svg-hitline {
+  stroke-opacity: 0.01;
+}
+
+/* Handle per manipolare gli endpoint delle linee */
+.line-handle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #000;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  z-index: 3; /* sopra le linee ma sotto le maniglie di resize dei nodi */
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+/* maniglia per ridimensionare i nodi */
+.node-resize {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  /* posizioniamo la maniglia leggermente fuori dal bordo in modo che
+     sia sempre visibile anche sui nodi circolari */
+  right: -8px;
+  bottom: -8px;
+  background: #0b84ff; /* colore contrastante */
+  border: 2px solid #fff;
+  border-radius: 4px;
+  cursor: se-resize;
+  z-index: 60;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  pointer-events: auto;
+}
+
+/* Canvas */
+.canvas {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ridimensionamento nodi */
+.node {
+  /* rimuoviamo il resize nativo per usare la maniglia personalizzata
+     e permettiamo agli elementi figlio (maniglia) di essere visibili
+     anche quando il nodo ha border-radius:50% (cerchio) */
+  overflow: visible;
+  z-index: 2; /* assicuriamo che i nodi stiano sopra l'SVG */
+}
+
+/* Pulsante elimina posizionato sugli oggetti */
+/* Pulsante elimina posizionato sugli oggetti */
+.object-delete {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #e74c3c;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 80;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* posizionamento predefinito per il delete dentro i nodi */
+.node > .object-delete {
+  right: -10px;
+  top: -10px;
+}
+
+/* pulsante delete per le linee (figlio del canvas) */
+.line-delete {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #e74c3c;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 40; /* sopra linee ma sotto nodo resize */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transform: translate(-50%, -50%);
+}
+
+/* --- Controls visibility: hidden by default, shown when selected --- */
+/* Hide node controls by default */
+.node > .object-delete { display: none; }
+.node .node-resize { display: none; }
+/* Show when node has selected class */
+.node.selected > .object-delete { display: inline-flex; }
+.node.selected .node-resize { display: block; }
+
+/* visual feedback when a node is selected */
+.node.selected {
+  box-shadow: 0 6px 18px rgba(11,132,255,0.18);
+  border-color: #0b84ff;
+}
+
+/* Edit (pencil) button and its action buttons for circle/rect nodes */
+.object-edit {
+  position: absolute;
+  left: 8px;
+  top: -10px;
+  width: 26px;
+  height: 26px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  z-index: 85;
+  cursor: pointer;
+  font-size: 14px;
+}
+.node.selected > .object-edit { display: inline-flex; }
+
+.edit-actions {
+  position: absolute;
+  left: 8px;
+  top: 22px;
+  display: none;
+  gap: 6px;
+  z-index: 90;
+}
+.edit-actions.show { display: flex; }
+.edit-actions .edit-btn {
+  width: 28px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* Text formatting toolbar (fixed below navbar) */
+.text-toolbar {
+  position: fixed;
+  /* position the toolbar directly below the navbar using the same variable */
+  top: var(--navbar-height, 100px);
+  left: 0;
+  right: 0;
+  display: none;
+  justify-content: center;
+  z-index: 2000;
+  pointer-events: auto;
+}
+.text-toolbar.show { display: flex; }
+.text-toolbar .toolbar-inner {
+  background: rgba(255,255,255,0.98);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.text-toolbar select, .text-toolbar input[type="color"], .text-toolbar button {
+  height: 32px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+.text-toolbar button.toggle-active {
+  background: #0b84ff;
+  color: #fff;
+  border-color: #0b84ff;
+}
+
+/* Hide line controls by default; JS will show them when a line is selected */
+.line-handle { display: none; }
+.line-delete { display: none; }
+
+/* Context menu */
+.context-menu {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  display: none;
+  z-index: 9999;
+}
+
+.context-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+.context-menu li {
+  padding: 6px 16px;
+  cursor: pointer;
+}
+
+.context-menu li:hover {
+  background: #eee;
+}
+/* --- RESPONSIVE --- */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .editor-container {
+    flex-direction: column;
+    margin-left: 0 !important;
+  }
+
+  .sidebar {
+    width: 240px;
+    height: 100%;
+    /* keep the sidebar below the navbar on smaller screens as well */
+    top: var(--navbar-height, 100px);
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-toggle {
+    top: calc(var(--navbar-height, 100px) + 10px); /* align below navbar */
+  }
+
+  .canvas {
+    width: 95%;
+    height: 500px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .editor-container {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: 100vh;
+    /* keep mobile sidebar below navbar */
+    top: var(--navbar-height, 100px);
+    left: 0;
+    transform: translateX(-100%);
+    border-right: none;
+    box-shadow: none;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 2px 0 12px rgba(0,0,0,0.2);
+  }
+
+  .sidebar-toggle {
+    top: calc(var(--navbar-height, 100px) + 6px);
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .canvas-area {
+    padding: 10px;
+  }
+
+  /* Keep canvas full-width on mobile and allow panning via JS.
+     We keep overflow hidden here and implement panning with pointer events
+     to avoid the canvas content being clipped in unexpected ways. */
+  .canvas {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    touch-action: none; /* we'll handle touch gestures for panning */
+  }
+
+  /* allow the inner wrapper to be interactive for pointer panning */
+  .canvas-inner { touch-action: none; }
+
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px;
+  }
+}

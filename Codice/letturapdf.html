@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lettura PDF</title>
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="letturapdf.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+   <!-- Font Awesome per icona profilo -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <div id="navbar"></div>
+
+  <!-- Container principale -->
+  <main class="pdf-container">
+    <h1>📄 Lettura PDF</h1>
+
+    <!-- Upload box -->
+    <div class="upload-box" id="uploadBox">
+      <input type="file" id="fileInput" accept="application/pdf" hidden>
+      <p>Trascina un PDF qui o clicca per selezionarlo</p>
+      <button id="uploadBtn">Carica PDF</button>
+    </div>
+
+    <!-- Area di visualizzazione -->
+    <div class="viewer">
+      <canvas id="pdfCanvas"></canvas>
+    </div>
+
+    <!-- Controlli -->
+    <div class="controls">
+      <button id="prevPage">⬅️ Pagina precedente</button>
+      <span id="pageInfo">Pagina 0 / 0</span>
+      <button id="nextPage">➡️ Pagina successiva</button>
+    </div>
+
+    <!-- Sintesi vocale -->
+    <div class="tts-controls">
+      <button id="readPdf">🔊 Leggi PDF</button>
+      <button id="stopRead">⏹️ Ferma lettura</button>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
+  <script src="letturapdf.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

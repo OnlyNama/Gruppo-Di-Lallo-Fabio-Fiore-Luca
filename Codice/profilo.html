@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profilo utente</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="profilo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+   <!-- Navbar -->
+  <div id="navbar"></div>
+
+
+  <!-- CONTENUTO -->
+  <main class="container">
+    <h1>Account</h1>
+    <p class="subtitle">Modifica il tuo profilo come vuoi!</p>
+
+    <!-- Card utente -->
+    <section class="profile-card">
+      <img src="https://via.placeholder.com/128" alt="Avatar" class="avatar">
+      <div>
+        <h2 id="profileName">Cameron Reading</h2>
+        <p id="profileEmail">Cameron.Reading@email.com</p>
+      </div>
+    </section>
+
+    <!-- Form modifica profilo -->
+    <section class="profile-edit">
+      <h2>Profilo</h2>
+      <form id="profileForm">
+        <label>Nome</label>
+        <input type="text" id="nameInput" value="Cameron Reading">
+        <label>Email</label>
+        <input type="email" id="emailInput" value="Cameron.Reading@email.com">
+        <button type="submit">Modifica Profilo</button>
+      </form>
+    </section>
+
+    <!-- Documenti PDF -->
+    <section class="documents">
+      <h2>Documenti PDF</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Documento</th>
+            <th>Data</th>
+            <th>Download</th>
+            <th>Visualizza</th>
+          </tr>
+        </thead>
+        <tbody id="docsTable">
+          <tr>
+            <td class="doc-title">Documento 1</td>
+            <td class="doc-date">26/09/2025</td>
+            <td class="doc-download">
+              <button class="download-btn"><i class="fas fa-download"></i> <span>Download</span></button>
+            </td>
+            <td class="doc-view">
+              <button class="view-btn">Visualizza</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="doc-title">Documento 2</td>
+            <td class="doc-date">25/09/2025</td>
+            <td class="doc-download">
+              <button class="download-btn"><i class="fas fa-download"></i> <span>Download</span></button>
+            </td>
+            <td class="doc-view">
+              <button class="view-btn">Visualizza</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+  
+  <script src="profilo.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

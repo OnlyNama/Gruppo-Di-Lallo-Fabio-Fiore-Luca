@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="agenda.css">
+    <!-- Font Awesome per icona profilo -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+  <main class="agenda-container">
+
+    <!-- Header Agenda -->
+    <div class="agenda-header">
+      <h1 class="agenda-title">Agenda</h1>
+      <a href="newactivity.html" class="add-activity-btn">+</a>
+    </div>
+
+    <!-- Due calendari affiancati -->
+    <section class="calendar-wrapper">
+      <div class="calendar">
+        <header class="calendar-header">
+          <button id="prev-month">&lt;</button>
+          <h2 id="month-year-1"></h2>
+        </header>
+        <div class="calendar-grid" id="calendar-grid-1"></div>
+      </div>
+
+      <div class="calendar">
+        <header class="calendar-header">
+          <h2 id="month-year-2"></h2>
+          <button id="next-month">&gt;</button>
+        </header>
+        <div class="calendar-grid" id="calendar-grid-2"></div>
+      </div>
+    </section>
+
+    <!-- Eventi -->
+    <section class="day-events">
+      <h2 id="selected-date-title">Seleziona un giorno</h2>
+      <ul id="event-list">
+        <li>Nessun evento</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Script esterno -->
+  <script src="agenda.js"></script>
+</body>
+</html>

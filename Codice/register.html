@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrazione</title>
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="login.css"> <!-- riutilizziamo lo stesso CSS del login -->
+</head>
+<body>
+  <!-- NAVBAR -->
+  <div id="navbar"></div>
+
+  <!-- Contenitore Registrazione -->
+  <div class="login-container">
+    <div class="login-card">
+      <h1>Registrati</h1>
+      <p class="subtitle">Crea un nuovo account</p>
+      <form id="registerForm">
+        <label for="fullname">Nome e Cognome</label>
+        <input type="text" id="fullname" placeholder="Inserisci il tuo nome completo" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Inserisci la tua email" required>
+
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Scegli un username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Crea una password" required>
+
+        <label for="confirmPassword">Conferma Password</label>
+        <input type="password" id="confirmPassword" placeholder="Ripeti la password" required>
+
+        <button type="submit" class="login-btn">Registrati</button>
+      </form>
+      <p class="signup-link">Hai già un account? <a href="login.html">Accedi</a></p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
+  <script src="script.js"></script>
+  <script src="register.js"></script>
+</body>
+</html>

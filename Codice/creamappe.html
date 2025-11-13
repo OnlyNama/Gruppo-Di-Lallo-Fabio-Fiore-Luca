@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crea Mappa</title>
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="creamappe.css">
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+   <!-- Font Awesome per icona profilo -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+   <!-- NAVBAR caricata -->
+  <div id="navbar"></div>
+
+  <!-- Layout -->
+  <main class="editor-container">
+    <!-- Menu laterale (trasformato in pannello a sinistra) -->
+    <aside class="sidebar" id="sidebar">
+      <h2>Strumenti</h2>
+      <button class="tool-btn" data-shape="circle">⚪ Cerchio</button>
+      <button class="tool-btn" data-shape="rect">⬜ Rettangolo</button>
+      <button class="tool-btn" data-shape="line">〰️ Linea</button>
+      <button class="tool-btn" data-shape="pdf">📄 Apri PDF</button>
+    </aside>
+    <div class="sidebar-toggle" id="sidebarToggle">☰</div>
+
+    <!-- Area mappa -->
+<section class="canvas-area">
+  <!-- Canvas per i nodi -->
+  <div id="canvas" class="canvas">
+    <!-- SVG per le linee (spostato dentro il canvas in modo che le linee siano dietro i nodi) -->
+    <svg id="connections" class="connections"></svg>
+    <div class="node central-node" contenteditable="true">Nodo centrale</div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-save">Salva</button>
+    <button class="btn btn-share">Condividi</button>
+  </div>
+</section>
+
+  </main>
+
+
+    <!-- FOOTER caricato -->
+  <div id="footer"></div>
+
+  <script src="creamappe.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+@import url('theme.css');
+
+/* THEME OVERRIDES - unified color scheme */
+:root{
+  --primary: #03A942;
+  --page-bg: #EEEEEE;
+  --card-bg: #ffffff;
+  --h1-color: #005D25;
+  --h2-color: #00B046;
+  --btn-bg: #38E078;
+  --btn-color: #000000;
+}
+/* global overrides */
+body { background-color: var(--page-bg); }
+.navbar, header, nav { background: var(--primary) !important; }
+.navbar a, .nav-links a, .navbar nav a { color: #fff !important; }
+.card, .container, .profile-card, .profile-edit, .documents, .example, .preview { background: var(--card-bg) !important; color: #2c3e50 !important; }
+h1 { color: var(--h1-color) !important; }
+h2 { color: var(--h2-color) !important; }
+button, .btn, .save-btn, .download-btn, .view-btn, .add-map, .add-activity-btn, .actions button { background: var(--btn-bg) !important; color: var(--btn-color) !important; border: none; }
+
+/* ------------------ GENERALE ------------------ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  background-color: #f4f6f9;
+  color: #111;
+}
+
+/* ------------------ NAVBAR ------------------ */
+.navbar {
+  background: var(--primary);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem 2rem;
+}
+
+.navbar nav a {
+  color: white;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar nav a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------ CONTAINER ------------------ */
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--h2-color);
+  margin-bottom: 2rem;
+}
+
+/* ------------------ PROFILE CARD ------------------ */
+.profile-card {
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.profile-card .avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+}
+
+/* ------------------ FORM PROFILO ------------------ */
+.profile-edit {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.profile-edit h2 {
+  margin-bottom: 1rem;
+}
+
+.profile-edit label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.profile-edit input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 0.25rem;
+}
+
+.profile-edit button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--btn-bg);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.profile-edit button:hover {
+  background: #1d4faf;
+}
+
+/* ------------------ DOCUMENTI ------------------ */
+.documents {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.documents h2 {
+  margin-bottom: 1rem;
+}
+
+.documents table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.documents th, .documents td {
+  border-bottom: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.documents th {
+  background: #f4f6f9;
+}
+
+.documents a {
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.documents a:hover {
+  text-decoration: underline;
+}
+
+/* Pulsanti Documenti */
+.download-btn, .view-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.download-btn {
+  background: var(--primary);
+  color: white;
+}
+
+.view-btn {
+  background: var(--h2-color);
+  color: white;
+}
+
+.download-btn:hover {
+  background: #1d4faf;
+}
+
+.view-btn:hover {
+  background: #365d82;
+}
+
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 768px) {
+  .profile-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-card .avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .navbar {
+    padding: 1rem;
+  }
+
+  .navbar nav {
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  .navbar nav a {
+    display: inline-block;
+    margin: 0.5rem 0.5rem;
+  }
+
+  .profile-edit, .documents {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-card .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-edit button {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  /* Documenti: layout verticale mobile */
+  .documents table, .documents thead, .documents tbody, .documents th, .documents td, .documents tr {
+    display: block;
+    width: 100%;
+  }
+
+  .documents thead {
+    display: none;
+  }
+
+  .documents tr {
+    margin-bottom: 1rem;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .documents td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: none;
+    font-size: 0.9rem;
+  }
+
+  .doc-title {
+    flex: 1 1 100%;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+  }
+
+  .doc-date {
+    flex: 1 1 100%;
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Download diventa solo icona */
+  .doc-download button {
+    padding: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .doc-download button span {
+    display: none; /* Nascondi testo Download */
+  }
+
+  /* Visualizza diventa View */
+  .doc-view button {
+    padding: 0.5rem 1rem;
+  }
+
+  .doc-view button::after {
+    content: "View";
+  }
+}

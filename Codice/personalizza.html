@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalizza PDF</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="personalizza.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- NAVBAR caricata -->
+  <div id="navbar"></div>
+
+  <main class="container">
+    <h1>Personalizza PDF</h1>
+
+    <!-- Upload PDF -->
+    <section class="upload-box">
+      <h2>Upload PDF</h2>
+      <div class="drop-area" id="dropArea">
+        <p>Trascina e rilascia il PDF qui o clicca per selezionarlo</p>
+        <input type="file" id="pdfInput" accept="application/pdf" hidden>
+        <button id="uploadBtn"><i class="fas fa-upload"></i> Seleziona PDF</button>
+        <p id="fileName"></p>
+      </div>
+    </section>
+
+    <!-- Opzioni testo -->
+    <section class="text-options">
+      <h2>Personalizzazione testo</h2>
+      <label for="fontSelect">Font</label>
+      <select id="fontSelect">
+        <option value="Inter">Inter</option>
+        <option value="DM Sans">DM Sans</option>
+        <option value="Poppins">Poppins</option>
+        <option value="Lato">Lato</option>
+        <option value="Rubik">Rubik</option>
+      </select>
+
+      <label for="fontSize">Grandezza testo</label>
+      <input type="number" id="fontSize" min="10" max="72" value="16">
+
+      <label for="fontColor">Colore</label>
+      <input type="color" id="fontColor" value="#000000">
+    </section>
+
+    <!-- Esempio -->
+    <section class="example">
+      <h2>Esempio di testo</h2>
+      <p id="exampleText">Esempio, esempio qui esempio! Esempio, esempio qui esempio!</p>
+    </section>
+
+    <!-- Preview -->
+    <section class="preview">
+      <h2>Preview</h2>
+      <p id="previewText">Anteprima del testo personalizzato in tempo reale.</p>
+    </section>
+
+    <!-- Pulsanti -->
+    <div class="actions">
+      <button id="confirmBtn"><i class="fas fa-check"></i> Conferma</button>
+      <button id="resetBtn" class="secondary"><i class="fas fa-undo"></i> Cancella</button>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="script.js"></script>
+  <script src="personalizza.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuova Attività</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="newactivity.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+  <main class="activity-container">
+    <h1>Nuova Attività</h1>
+    <form class="activity-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="title">Titolo evento</label>
+          <input type="text" id="title" placeholder="Studiare la Divina Commedia">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="date">Data</label>
+          <input type="date" id="date">
+        </div>
+
+        <div class="form-group half">
+          <label for="time">Ora</label>
+          <input type="time" id="time">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="description">Descrizione</label>
+          <textarea id="description" placeholder="Inserisci dettagli..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="save-btn">Salva</button>
+      </div>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelector(".activity-form").addEventListener("submit", e => {
+        e.preventDefault();
+        alert("Attività salvata!");
+      });
+    });
+  </script>
+</body>
+</html>
